@@ -54,13 +54,13 @@ public class DAO {
 	}
 	
 	public void actualizar() {
-		String sql = "UPDATE tabla_1 SET nombre = ?, id = ?, dni = ?;";
+		String sql = "UPDATE tabla_1 SET nombre = ?, dni = ? WHERE id = ?;";
 		try (Connection conexion = DriverManager.getConnection(path, user, psw);
 				PreparedStatement stnt = conexion.prepareStatement(sql)){
 				stnt.setString(1, "nico");	
 				stnt.setInt(2, 6);
 				stnt.setInt(3, 3456789);
-			int filas = = stnt.executeUpdate();
+			int filas = stnt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 
