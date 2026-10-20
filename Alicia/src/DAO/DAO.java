@@ -13,11 +13,11 @@ public class DAO {
 	private String path = "jdbc:mysql://localhost:3306/bd_53";
 
 	
-	public void eliminar(int id ) {
+	public void eliminar( ) {
 		String sql = "DELETE FROM tabla_1 ";
 		try (Connection conexion = DriverManager.getConnection(path, user, psw);
 			PreparedStatement stnt = conexion.prepareStatement(sql)){
-			stnt.setInt(1, id);
+			int filas = stnt.executeUpdate(); 
 				System.out.println("se elimino ");
 	          
 		} catch (SQLException e) {
@@ -26,10 +26,11 @@ public class DAO {
 		}
 	}
 	public void eliminarPorFiltro(int id ) {
-		String sql = "DELETE FROM tabla_1 WHERE id =4  ";
+		String sql = "DELETE FROM tabla_1 WHERE id = ? ";
 		try (Connection conexion = DriverManager.getConnection(path, user, psw);
 			PreparedStatement stnt = conexion.prepareStatement(sql)){
 			  stnt.setInt(1, id);
+			int filas = stnt.executeUpdate();
 				System.out.println("se elimino x filtro ");
 	          
 		} catch (SQLException e) {
@@ -53,12 +54,13 @@ public class DAO {
 	}
 	
 	public void actualizar() {
-		String sql = "UPDATE tabla_1 SET nombre = 'nico', id = 5, dni = 23089420;";
+		String sql = "UPDATE tabla_1 SET nombre = ?, id = ?, dni = ?;";
 		try (Connection conexion = DriverManager.getConnection(path, user, psw);
 				PreparedStatement stnt = conexion.prepareStatement(sql)){
 				stnt.setString(1, "nico");	
 				stnt.setInt(2, 6);
 				stnt.setInt(3, 3456789);
+			int filas = = stnt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 
