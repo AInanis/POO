@@ -1,9 +1,12 @@
 package dao;
 
+import java.awt.TextField;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import modelo.Persona;
 public class DAO {
 
 	String user = "root";
@@ -29,8 +32,6 @@ public class DAO {
 				e.printStackTrace();
 			}
 		}
-	
-		
 	}
 	
 	public Connection conectar() {
@@ -56,5 +57,7 @@ public class DAO {
 		}
 		return conexion;
 	}
+
+	
 
 }
