@@ -1,46 +1,100 @@
 package modelo;
 
 public class Persona {
-private int locura ;
-private String dni;
-private String nombre;
-private int distancia;
-private int secretos;
-public int getLocura() {
-	return locura;
-}
-public void setLocura(int locura) {
-	this.locura = locura;
-}
-public String getDni() {
-	return dni;
-}
-public void setDni(String dni) {
-	this.dni = dni;
-}
-public String getNombre() {
-	return nombre;
-}
-public Persona(int locura, String dni, String nombre, int distancia, int secretos) {
-	this.locura = locura;
-	this.dni = dni;
-	this.nombre = nombre;
-	this.distancia = distancia;
-	this.secretos = secretos;
-}
-public void setNombre(String nombre) {
-	this.nombre = nombre;
-}
-public int getDistancia() {
-	return distancia;
-}
-public void setDistancia(int distancia) {
-	this.distancia = distancia;
-}
-public int getSecretos() {
-	return secretos;
-}
-public void setSecretos(int secretos) {
-	this.secretos = secretos;
-}
+	private int id;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public float getLocura() {
+		return locura;
+	}
+
+	public void setLocura(float locura) {
+		this.locura = locura;
+	}
+
+	public float getSecretos() {
+		return secretos;
+	}
+
+	public void setSecretos(float secretos) {
+		this.secretos = secretos;
+	}
+
+	public float getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(float ubicacion) {
+		this.ubicacion = ubicacion;
+	}
+
+	public float getLocuraMax() {
+		return locuraMax;
+	}
+
+	public Persona(float locura, float secretos, float ubicacion) {
+		super();
+		this.locura = locura;
+		this.secretos = secretos;
+		this.ubicacion = ubicacion;
+	}
+
+	public Persona(int locura, int secretos) {
+		this.locura = locura;
+		this.secretos = secretos;
+	}
+
+	private String nombre;
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Persona(String nombre, float locura) {
+		super();
+		this.nombre = nombre;
+		this.locura = locura;
+	}
+
+	private float locura;
+	private float secretos;
+	private float ubicacion;
+	public Persona(String nombre, float locura, float secretos, float ubicacion) {
+		super();
+		this.nombre = nombre;
+		this.locura = locura;
+		this.secretos = secretos;
+		this.ubicacion = ubicacion;
+	}
+
+	private final float locuraMax = 100;
+
+	public boolean esLindo() {
+		return locura > locuraMax * 0.75f;
+	}
+
+	public boolean esNormal() {
+		return locura < 10 && secretos >= 500;
+	}
+
+	public boolean estaEnMaravilla() {
+		return ubicacion < 0;
+	}
+
+	public void embellecer(float valor) {
+		locura += valor;
+		secretos -= 10;
+	}
+
 }
