@@ -17,11 +17,15 @@ public class PanelConsultaTabla extends JPanel {
 	private JTable table = new JTable();;
 	conexion c = new conexion();
 	DefaultTableModel modelo;
-	Object[] columnas = new Object[] { "Nombre"," "Edad", "NivelEstudio", "Estudio" };
+	Object[] columnas = new Object[] { "Nombre","dni", "NivelEstudio", "Hijos" };
 	
 	
 	public PanelConsultaTabla(JFrame marco) {
        setLayout(null);
+       conexion c = new conexion();
+       
 	}
+	
+	
 
 }

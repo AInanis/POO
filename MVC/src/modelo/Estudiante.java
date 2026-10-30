@@ -1,11 +1,11 @@
 package modelo;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 
 public class Estudiante {
 private String nombre ;
-private String dni;
+private String dni; // pk de "persona" estudiante 
 private boolean hijos;
 private String nivelEstudios ;
 private LocalDate fechaNacimiento;

@@ -4,15 +4,17 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import modelo.Estudiante;
-
+import java.util.ArrayList;
 public class conexion {
 	
 private String user = "root";
  private String psw = "admin";
- private String path = "jdbc:mysql://localhost:3306/bd_52";
+ private String path = "jdbc:mysql://localhost:3306/tifinalpoo";
  
  public Connection conectar() {
 		Connection conexion = null;
@@ -66,9 +68,54 @@ public int agregarPersonaPorParametro(Estudiante e) {
 		}
 
 	}
-	return filas; // devuelve las filas afectadas
+	return filas;
+}// devuelve las filas afectadas
 
-}
+	public ArrayList<Estudiante> consultar(){
+		 Connection conexion = null;
+		 String sql = "SELECT * FROM personas";
+		 ArrayList<Estudiante> solucion = new ArrayList<>();
+		 //sql = "SELECT * FROM personas;"; //WHERE nombre = '"+p.getNombre()+"'
+			try {
+				conexion = conectar();
+				Statement stmt = conexion.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				while(rs.next()) {
+			        String nombre = rs.getString("nombre");
+					String fecha = rs.getString("nacimiento");
+					String tieneHijos = rs.getString("hijoas");
+					String dni = rs.getString("dni");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					conexion.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return solucion;
+	}
+	
+	public void actualizarPersonaPorParametro(Estudiante personaAnterior, Estudiante personaNueva) {
+
+	    String sql = "UPDATE tabla SET nombre = ? dni = ? fechaNacimiento = ? hijoas = ? WHERE dni = ?";
+
+	    try {
+            Connection c = null;
+            c = conectar();
+            PreparedStatement stnt = c.prepareStatement(sql);
+	        stnt.setString(1, personaNueva.getNombre());
+	        stnt.setString(2, personaNueva.getDni());
+	        stnt.setDate(3, Date.valueOf(personaNueva.getFechaNacimiento()));
+	        stnt.setInt(4, personaNueva.getNivelEstudios());
+
+	        int filas = stnt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 
 
 }
