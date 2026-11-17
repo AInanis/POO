@@ -14,7 +14,7 @@ import modelo.Persona;
 public class conexion {
 
 	String user = "root";
-	String psw = "milei";
+	String psw = "admin";
 	String path = "jdbc:mysql://localhost:3306/gestion_barrios";
 
 	public Connection conectar() {

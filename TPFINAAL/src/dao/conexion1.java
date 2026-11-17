@@ -15,7 +15,7 @@ import modelo.UrbanizacionPlanificada;
 import modelo.ComplejoHabitacional;
 public class conexion1 {
 	String user = "root";
-	String psw = "milei";
+	String psw = "admin ";
 	String path = "jdbc:mysql://localhost:3306/gestion_barrios";
 
 	public Connection conectar() {
@@ -42,23 +42,32 @@ public class conexion1 {
 		        if (barrio instanceof TrazadoFormal) {
 
 		       TrazadoFormal tf = (TrazadoFormal) barrio;
-               stmt.setString(3, "Trazado formal");
-		       stmt.setInt(4, tf.getCantidadEdificiosPH());
-		       stmt.setDouble(5, tf.getPorcentajeAsfalto());
-
+		       stmt.setInt(3, tf.getCantidadEdificiosPH());
+		       stmt.setDouble(4, tf.getPorcentajeAsfalto());
+		       stmt.setNull(5, java.sql.Types.DOUBLE);
+		       stmt.setNull(6, java.sql.Types.BOOLEAN);
+		       stmt.setNull(7, java.sql.Types.INTEGER);
+		       stmt.setNull(8, java.sql.Types.BOOLEAN);
 
 		        } else if (barrio instanceof UrbanizacionPlanificada) {
 
 		        UrbanizacionPlanificada up = (UrbanizacionPlanificada) barrio;
-                stmt.setInt(6, up.getNumeroLeyIntegracion());
-		        stmt.setBoolean(7, up.isConexionFormalAgua());
+		        stmt.setNull(3,  java.sql.Types.INTEGER);
+		        stmt.setNull(4,  java.sql.Types.DOUBLE);
+                stmt.setInt(5, up.getNumeroLeyIntegracion());
+		        stmt.setBoolean(6, up.isConexionFormalAgua());
+		        stmt.setNull(7,  java.sql.Types.INTEGER);
+		        stmt.setNull(8,  java.sql.Types.BOOLEAN);
+		        
 		            
                 } else if (barrio instanceof ComplejoHabitacional) {
 		        ComplejoHabitacional ch = (ComplejoHabitacional) barrio;
-		            
-		        stmt.setString(3, "Complejo Habitacional");
-		        stmt.setInt(8, ch.getCantidadMonoblocks());
-		        stmt.setBoolean(9, ch.isConsorcioActivo());
+		        stmt.setNull(3,  java.sql.Types.INTEGER);
+		        stmt.setNull(4,  java.sql.Types.DOUBLE);
+		        stmt.setNull(5,  java.sql.Types.DOUBLE);
+		        stmt.setNull(6,  java.sql.Types.INTEGER);
+ 		        stmt.setInt(7, ch.getCantidadMonoblocks());
+		        stmt.setBoolean(8, ch.isConsorcioActivo());
 
 		        }			
 		} catch (SQLException e) {
@@ -75,7 +84,7 @@ public class conexion1 {
 	}
 	
 	
-	public void eliminarPorParametro (Barrio barrio) {
+	public void eliminarBarrioPorParametro (Barrio barrio) {
 		Connection c = null;
 		String SQL = "DELETE from barrios WHERE nombreBarrio = ?";
 		try {
